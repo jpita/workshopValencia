@@ -6,6 +6,7 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
@@ -33,5 +34,7 @@ public class BaseTest {
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
                 "org.wikipedia.onboarding.InitialOnboardingActivity");
         driver = new AndroidDriver(appiumServerURL, capabilities);
+        Assert.assertTrue(driver.findElementById("org.wikipedia.alpha:id/view_onboarding_page_image_centered").isDisplayed());
+        driver.quit();
     }
 }

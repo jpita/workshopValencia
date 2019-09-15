@@ -6,8 +6,8 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,9 +22,7 @@ public class BaseTest {
     public BaseTest() throws MalformedURLException {
     }
 
-    @Test
-    public void firstTest()
-    {
+    private void createDriver(){
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
         capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
@@ -34,7 +32,17 @@ public class BaseTest {
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
                 "org.wikipedia.onboarding.InitialOnboardingActivity");
         driver = new AndroidDriver(appiumServerURL, capabilities);
-        Assert.assertTrue(driver.findElementById("org.wikipedia.alpha:id/view_onboarding_page_image_centered").isDisplayed());
+    }
+
+    @BeforeMethod
+    public void setup()
+    {
+        createDriver();
+    }
+
+    @AfterMethod
+    public void tearDown()
+    {
         driver.quit();
     }
 }

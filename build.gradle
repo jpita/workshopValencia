@@ -27,3 +27,14 @@ allure {
     autoconfigure = true
     aspectjweaver = true
 }
+
+
+test {
+    useTestNG() {
+        suites 'testng.xml'
+    }
+    testLogging {
+        events "PASSED", "STARTED", "FAILED", "SKIPPED"
+    }
+    systemProperty 'env', System.getProperty('env', 'all')
+}

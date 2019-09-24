@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
 
+    private final AppiumDriver driver;
     @AndroidFindBy(id = "org.wikipedia.alpha:id/fragment_onboarding_forward_button")
     protected MobileElement nextPageButton;
 
@@ -19,6 +20,7 @@ public class BasePage {
     protected MobileElement onBoardingTitle;
 
     public BasePage(AppiumDriver driver){
+        this.driver=driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
@@ -26,8 +28,9 @@ public class BasePage {
         return onBoardingImage.isDisplayed();
     }
 
-    public void tapNextPageButton(){
+    public SecondOnBoardingPage tapNextPageButton(){
         nextPageButton.click();
+        return new SecondOnBoardingPage(driver);
     }
 
 }

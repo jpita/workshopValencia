@@ -1,10 +1,8 @@
 package appium.tests;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
-import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -23,15 +21,37 @@ public class BaseTest {
     }
 
     private void createDriver(){
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
-        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
-        capabilities.setCapability("newCommandTimeout", 120);
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "phone");
-        capabilities.setCapability(MobileCapabilityType.APP, appPath);
-        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
-                "org.wikipedia.onboarding.InitialOnboardingActivity");
-        driver = new AndroidDriver(appiumServerURL, capabilities);
+        //Set the Desired Capabilities
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("deviceName", "My Phone");
+        caps.setCapability("platformName", "Android");
+        caps.setCapability("platformVersion", "9");
+        caps.setCapability("browserName", "Chrome");
+        caps.setCapability("noReset", true);
+
+        //Set ChromeDriver location
+        //System.setProperty("webdriver.chrome.driver",runningPath+"/chromedriver264");
+
+        //Instantiate Appium Driver
+        AppiumDriver<MobileElement> driver = null;
+        try {
+            driver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), caps);
+
+        } catch (MalformedURLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Open URL in Chrome Browser
+        driver.get("https://www.google.com/search?q=something+wikipedia");
+//        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+//        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
+//        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+//        capabilities.setCapability("newCommandTimeout", 120);
+//        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "phone");
+//        capabilities.setCapability(MobileCapabilityType.APP, appPath);
+//        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
+//                "org.wikipedia.onboarding.InitialOnboardingActivity");
+//        driver = new AndroidDriver(appiumServerURL, capabilities);
     }
 
     @BeforeMethod

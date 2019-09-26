@@ -16,7 +16,6 @@ repositories {
 dependencies {
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.1.0'
     testCompile group: 'org.testng', name: 'testng', version: '7.0.0'
-    testCompile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     testCompile 'io.appium:java-client:7.2.0'
     testCompile "ru.yandex.qatools.allure:allure-testng-adaptor:1.5.4"
     testCompile "io.qameta.allure:allure-gradle:2.8.1"

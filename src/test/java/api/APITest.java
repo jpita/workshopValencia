@@ -9,7 +9,6 @@ public class APITest {
     private static String baseURL = "https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json";
 
     public String getSearchResult(String query) {
-    //then().body("title", equalTo("Nelson Mandela"));
         return (String) given().get(baseURL+"&srsearch="+query).then()
                 .extract()
                 .jsonPath()

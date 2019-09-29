@@ -1,4 +1,4 @@
-package appium;
+package helpers;
 
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.io.FileUtils;

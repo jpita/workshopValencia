@@ -19,6 +19,7 @@ dependencies {
     testCompile 'io.appium:java-client:7.2.0'
     testCompile "ru.yandex.qatools.allure:allure-testng-adaptor:1.5.4"
     testCompile "io.qameta.allure:allure-gradle:2.8.1"
+    testCompile 'com.google.firebase:firebase-admin:6.0.0'
 }
 
 allure {

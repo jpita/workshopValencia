@@ -5,6 +5,8 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -84,6 +86,20 @@ public class BasePage {
 
     protected void swipeRight(){
         swipeByCoordinates(driver,leftEdgeOfTheScreen, height/2, rightEdgeOfTheScreen, height/2);
+    }
+
+    public void doubleTap(AppiumDriver driver, MobileElement firstBusStopOnMapElement) {
+        new TouchAction(driver)
+                .tap(TapOptions.tapOptions().withElement(ElementOption.element(firstBusStopOnMapElement)))
+                .tap(TapOptions.tapOptions().withElement(ElementOption.element(firstBusStopOnMapElement)))
+                .perform();
+    }
+
+    public void tapByCoordinates(AppiumDriver driver, int x, int y){
+        new TouchAction(driver)
+                .tap(TapOptions.tapOptions()
+                        .withPosition(new PointOption().withCoordinates(x,y)))
+                .perform();
     }
 
 }

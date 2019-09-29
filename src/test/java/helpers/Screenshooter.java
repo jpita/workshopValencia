@@ -10,11 +10,11 @@ import java.io.IOException;
 public class Screenshooter {
     public static void takeScreenshot(AppiumDriver driver){
         File file = driver.getScreenshotAs(OutputType.FILE);
-
+        String timestamp = String.valueOf(System.currentTimeMillis());
         // the filename is the folder name on test.screenshot.path property plus the completeTestName
         try {
             FileUtils.copyFile(file,
-                    new File("screenshot.png"));
+                    new File("screenshots/screenshot"+timestamp+".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

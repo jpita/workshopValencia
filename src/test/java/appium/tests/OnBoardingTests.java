@@ -2,6 +2,7 @@ package appium.tests;
 
 import appium.pageobjects.FirstOnBoardingPage;
 import appium.pageobjects.SecondOnBoardingPage;
+import helpers.Screenshooter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,6 +15,7 @@ public class OnBoardingTests extends BaseTest{
     @Test
     public void checkOnBoardingTest(){
         FirstOnBoardingPage firstOnBoardingPage = new FirstOnBoardingPage(driver);
+        Screenshooter.takeScreenshot(driver);
         Assert.assertTrue(firstOnBoardingPage.checkForOnBoardingImagePresence(),
                 "OOPS! image is not showing");
         Assert.assertTrue(firstOnBoardingPage.isFirstOnBoardingPageTitleCorrect(),
@@ -23,5 +25,6 @@ public class OnBoardingTests extends BaseTest{
                 "OOPS! image is not showing");
         Assert.assertTrue(secondOnBoardingPage.isSecondOnBoardingPageTitleCorrect(),
                 "OOPS! title is not correct");
+        Screenshooter.takeScreenshot(driver);
     }
 }

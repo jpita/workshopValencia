@@ -16,7 +16,7 @@ public class OnBoardingTests extends BaseTest{
     public void checkOnBoardingTest(){
         FirstOnBoardingPage firstOnBoardingPage = new FirstOnBoardingPage(driver);
         Screenshooter.takeScreenshot(driver);
-        Assert.assertTrue(false,
+        Assert.assertTrue(firstOnBoardingPage.checkForOnBoardingImagePresence(),
                 "OOPS! image is not showing");
         Assert.assertTrue(firstOnBoardingPage.isFirstOnBoardingPageTitleCorrect(),
                 "OOPS! title is not correct");

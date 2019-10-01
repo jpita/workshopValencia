@@ -2,45 +2,64 @@ package appium.tests;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
-import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     public AppiumDriver driver = null;
     private URL appiumServerURL = new URL("http://localhost:4723/wd/hub");
     private DesiredCapabilities capabilities = new DesiredCapabilities();
     private String runningPath = System.getProperty("user.dir");
-    private String appPath = runningPath+"/apps/app-alpha-debug.apk";
+    private String appPathAndroid = runningPath+"/apps/app-alpha-debug.apk";
+    private String appPathIOS = runningPath+"";
 
     public BaseTest() throws MalformedURLException {
     }
 
-    private void createDriver(){
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
-        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+    private void createDriver(String platformName, String udid, String platformVersion){
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, udid);
         capabilities.setCapability("newCommandTimeout", 120);
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "phone");
-        capabilities.setCapability(MobileCapabilityType.APP, appPath);
-        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
-                "org.wikipedia.onboarding.InitialOnboardingActivity");
-        driver = new AndroidDriver(appiumServerURL, capabilities);
+
+
+        if(platformName.equals("android")) {
+            capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+            capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY,
+                    "org.wikipedia.onboarding.InitialOnboardingActivity");
+            capabilities.setCapability(MobileCapabilityType.APP, appPathAndroid);
+            driver = new AndroidDriver(appiumServerURL, capabilities);
+        }
+        else if (platformName.equals("ios")){
+            capabilities.setCapability(MobileCapabilityType.APP, appPathIOS);
+            capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
+            driver = new IOSDriver(appiumServerURL, capabilities);
+        }
+        else System.out.println("OOPS, something bad happened with the platform name");
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    @BeforeMethod
-    public void setup()
-    {
-        createDriver();
+    @BeforeMethod(alwaysRun = true)
+    @Parameters( {"platform","udid", "platformVersion"} )
+    public void setup(@Optional("android") String platformName,
+                      @Optional("S9")String udid,
+                      @Optional("9") String platformVersion) {
+        createDriver(platformName, udid, platformVersion);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown()
     {
         driver.quit();

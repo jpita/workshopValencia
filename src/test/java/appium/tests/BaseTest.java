@@ -56,8 +56,8 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     @Parameters( {"platform","udid", "platformVersion"} )
     public void setup(@Optional("ios") String platformName,
-                      @Optional("iPhone 11 Pro Max")String udid,
-                      @Optional("13.0") String platformVersion) {
+                      @Optional("iPhone 8")String udid,
+                      @Optional("12.0") String platformVersion) {
         createDriver(platformName, udid, platformVersion);
     }
 

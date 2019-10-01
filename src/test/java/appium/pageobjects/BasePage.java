@@ -5,6 +5,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
@@ -28,13 +29,17 @@ public class BasePage {
     private final int upperEdgeOfTheScreen;
     private final int lowerEdgeOfTheScreen;
 
-
+    @iOSXCUITFindBy(accessibility = "Next")
     @AndroidFindBy(id = "org.wikipedia.alpha:id/fragment_onboarding_forward_button")
     protected MobileElement nextPageButton;
 
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeApplication[@name=\"Wikipedia\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeImage")
     @FindBy(id = "org.wikipedia.alpha:id/view_onboarding_page_image_centered")
     protected MobileElement onBoardingImage;
 
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"The free encyclopedia\"]")
     @FindBy(id = "org.wikipedia.alpha:id/view_onboarding_page_primary_text")
     protected MobileElement onBoardingTitle;
 

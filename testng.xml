@@ -8,11 +8,6 @@
         <parameter name="platform" value="android"/>
         <parameter name="platformVersion" value="9"/>
         <parameter name="udid" value="S9"/>
-        <groups>
-            <run>
-                <include name="android"/>
-            </run>
-        </groups>
         <packages>
             <package name="appium.tests.*" />
         </packages>

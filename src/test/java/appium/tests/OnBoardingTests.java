@@ -12,7 +12,7 @@ public class OnBoardingTests extends BaseTest{
     public OnBoardingTests() throws MalformedURLException {
     }
 
-    @Test
+    @Test(groups = {"android"})
     public void checkOnBoardingTest(){
         FirstOnBoardingPage firstOnBoardingPage = new FirstOnBoardingPage(driver);
         Screenshooter.takeScreenshot(driver);

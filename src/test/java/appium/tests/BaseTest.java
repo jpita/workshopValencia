@@ -22,7 +22,7 @@ public class BaseTest {
     private DesiredCapabilities capabilities = new DesiredCapabilities();
     private String runningPath = System.getProperty("user.dir");
     private String appPathAndroid = runningPath+"/apps/app-alpha-debug.apk";
-    private String appPathIOS = runningPath+"";
+    private String appPathIOS = runningPath+"/apps/Wikipedia.app";
 
     public BaseTest() throws MalformedURLException {
     }
@@ -43,7 +43,9 @@ public class BaseTest {
         }
         else if (platformName.equals("ios")){
             capabilities.setCapability(MobileCapabilityType.APP, appPathIOS);
-            capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
+            capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS,
+                    true);
+            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
             driver = new IOSDriver(appiumServerURL, capabilities);
         }
         else System.out.println("OOPS, something bad happened with the platform name");
@@ -53,9 +55,9 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     @Parameters( {"platform","udid", "platformVersion"} )
-    public void setup(@Optional("android") String platformName,
-                      @Optional("S9")String udid,
-                      @Optional("9") String platformVersion) {
+    public void setup(@Optional("ios") String platformName,
+                      @Optional("iPhone 11 Pro Max")String udid,
+                      @Optional("13.0") String platformVersion) {
         createDriver(platformName, udid, platformVersion);
     }
 

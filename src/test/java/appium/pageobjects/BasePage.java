@@ -27,6 +27,8 @@ public class BasePage {
     private final int leftEdgeOfTheScreen;
     private final int upperEdgeOfTheScreen;
     private final int lowerEdgeOfTheScreen;
+
+
     @AndroidFindBy(id = "org.wikipedia.alpha:id/fragment_onboarding_forward_button")
     protected MobileElement nextPageButton;
 

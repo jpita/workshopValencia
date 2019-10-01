@@ -6,4 +6,9 @@
             <package name="appium.tests.*" />
         </packages>
     </test>
+    <test name="all-api-tests">
+        <packages>
+            <package name="api.*" />
+        </packages>
+    </test>
 </suite>

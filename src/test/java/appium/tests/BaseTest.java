@@ -27,11 +27,14 @@ public class BaseTest {
         caps.setCapability("deviceName", "My Phone");
         caps.setCapability("platformName", "Android");
         caps.setCapability("platformVersion", "9");
-        caps.setCapability("browserName", "Chrome");
+        caps.setCapability("newCommandTimeout", 200);
+//        caps.setCapability("browserName", "Chrome");
+        caps.setCapability("appPackage", "com.android.chrome");
+        caps.setCapability("appActivity", "com.google.android.apps.chrome.Main");
         caps.setCapability("noReset", true);
 
         //Set ChromeDriver location
-        //System.setProperty("webdriver.chrome.driver",runningPath+"/chromedriver264");
+//        System.setProperty("webdriver.chrome.driver",runningPath+"/chromedriver264");
 
         //Instantiate Appium Driver
         AppiumDriver<MobileElement> driver = null;
@@ -44,7 +47,7 @@ public class BaseTest {
 
         //Open URL in Chrome Browser
         driver.get("https://www.google.com/search?q=something+wikipedia");
-        driver.findElement(By.cssSelector("#rso > div:nth-child(1) > div:nth-child(1) > div > div > div.jGGQ5e > div > a > div.zlBHuf.MUxGbd.v0nnCb")).click();
+        driver.findElement(By.className("jGGQ5e")).click();
 //        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
 //        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
 //        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
